@@ -1,0 +1,219 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| accountdb          |
+| accounting         |
+| bank               |
+| bank_bd            |
+| bank_d             |
+| bank_db            |
+| banking            |
+| custmer            |
+| db                 |
+| information_schema |
+| medical            |
+| mysql              |
+| performance_schema |
+| person             |
+| program1           |
+| second2            |
+| store              |
+| students           |
+| studentsdb         |
+| studentsdb1        |
+| sys                |
+| user               |
+| user4              |
++--------------------+
+23 rows in set (0.12 sec)
+
+mysql> use program1;
+Database changed
+mysql> create table stdb(s_name varchar(100),s_id int,s_mark int);
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> insert into stdb values("AAA",101,460);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into stdb values("BBB",102,300);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into stdb values("CCC",103,400);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into stdb values("DDD",104,350);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into stdb values("EEE",105,250);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select *from stdb;
++--------+------+--------+
+| s_name | s_id | s_mark |
++--------+------+--------+
+| AAA    |  101 |    460 |
+| BBB    |  102 |    300 |
+| CCC    |  103 |    400 |
+| DDD    |  104 |    350 |
+| EEE    |  105 |    250 |
++--------+------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update table stdb (s_id int primary key);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table stdb (s_id int primary key)' at line 1
+mysql> alter table stdb add s_id int primary key;
+ERROR 1060 (42S21): Duplicate column name 's_id'
+mysql> ALTER TABLE stdb
+    -> ADD PRIMARY KEY (s_id);
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select* from stdb;
++--------+------+--------+
+| s_name | s_id | s_mark |
++--------+------+--------+
+| AAA    |  101 |    460 |
+| BBB    |  102 |    300 |
+| CCC    |  103 |    400 |
+| DDD    |  104 |    350 |
+| EEE    |  105 |    250 |
++--------+------+--------+
+5 rows in set (0.00 sec)
+
+mysql> desc stdb;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| s_name | varchar(100) | YES  |     | NULL    |       |
+| s_id   | int          | NO   | PRI | NULL    |       |
+| s_mark | int          | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> alter  table stdb add s_age int;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc stdb;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| s_name | varchar(100) | YES  |     | NULL    |       |
+| s_id   | int          | NO   | PRI | NULL    |       |
+| s_mark | int          | YES  |     | NULL    |       |
+| s_age  | int          | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> ALTER TABLE stdb drop s_age;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc stdb;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| s_name | varchar(100) | YES  |     | NULL    |       |
+| s_id   | int          | NO   | PRI | NULL    |       |
+| s_mark | int          | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter  table stdb add phone int;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc stdb;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| s_name | varchar(100) | YES  |     | NULL    |       |
+| s_id   | int          | NO   | PRI | NULL    |       |
+| s_mark | int          | YES  |     | NULL    |       |
+| phone  | int          | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> ALTER TABLE stdb modify s_age varchar(100);
+ERROR 1054 (42S22): Unknown column 's_age' in 'stdb'
+mysql> ALTER TABLE stdb modify dept varchar(100);
+ERROR 1054 (42S22): Unknown column 'dept' in 'stdb'
+mysql> ALTER TABLE stdb modify s_id varchar(100);
+Query OK, 5 rows affected (0.07 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> desc stdb;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| s_name | varchar(100) | YES  |     | NULL    |       |
+| s_id   | varchar(100) | NO   | PRI | NULL    |       |
+| s_mark | int          | YES  |     | NULL    |       |
+| phone  | int          | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table stdb rename to sdb;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc sdb;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| s_name | varchar(100) | YES  |     | NULL    |       |
+| s_id   | varchar(100) | NO   | PRI | NULL    |       |
+| s_mark | int          | YES  |     | NULL    |       |
+| phone  | int          | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> alter table sdb s_id int;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 's_id int' at line 1
+mysql> alter table sdb  modify s_id int;
+Query OK, 5 rows affected (0.06 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> desc sdb;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| s_name | varchar(100) | YES  |     | NULL    |       |
+| s_id   | int          | NO   | PRI | NULL    |       |
+| s_mark | int          | YES  |     | NULL    |       |
+| phone  | int          | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> create table class(c_no int,s_id int,courses_name varchar(100),foreign key (s_id) references sdb (s_id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create table class(c_no int,s_id int,courses_name varchar(100),foreign key (s_id) references sdb (s_id));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into  class values(11,101,"XX");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into  class values(11,103,"YY");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into  class values(12,105,"ZZ");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into  class values(12,104,"PP");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from class;
++------+------+--------------+
+| c_no | s_id | courses_name |
++------+------+--------------+
+|   11 |  101 | XX           |
+|   11 |  103 | YY           |
+|   12 |  105 | ZZ           |
+|   12 |  104 | PP           |
++------+------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> truncate table class;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> Terminal close -- exit!
